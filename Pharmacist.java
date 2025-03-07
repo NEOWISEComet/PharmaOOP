@@ -16,6 +16,10 @@ class Pharmacist {
         pharmacy.sellMedicine(name, quantity);
     }
 
+    public void viewInventory() {
+        pharmacy.viewInventory();
+    }
+
     @Override
     public String toString() {
         return "Pharmacist: " + name;

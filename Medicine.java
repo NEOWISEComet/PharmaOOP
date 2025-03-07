@@ -38,7 +38,7 @@ class Medicine {
 
     @Override
     public String toString() {
-        return "--[ Drug: " + name + "\tManufacturer: " + company + "\tPrice: " + price + "\tQuantity: " + quantity + " ]--\n";
+        return "--[ Drug: " + name + "\tManufacturer: " + company + "\tPrice: " + price + "\tQuantity: " + quantity + " ]--";
     }
 
 }

@@ -120,6 +120,7 @@ public class Main {
                 System.out.println(
                     "--[ Pharmacy Management System ]--\n" +
                     "Pharmacist: " + pharmacistName + "\n" +
+                    "0. View Incentory\n" +
                     "1. Search medicine\n" +
                     "2. Sell medicine\n" +
                     "3. Exit"
@@ -129,6 +130,9 @@ public class Main {
                 sc.nextLine(); 
 
                 switch (choice) {
+                    case 0:
+                        pharmacist.viewInventory();
+                        break;
                     case 1:
                         System.out.print("Search Drug: ");
                         String searchDrug = sc.nextLine();

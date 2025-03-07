@@ -26,7 +26,14 @@ class Inventory {
     }
 
     public void viewInventory() {
-        System.out.println("Current Inventory: " + inventory.values() + "\n");
+        //System.out.println("Inventory: " + "\n" + inventory.values() + "\n");
+        System.out.println("Inventory:");
+        for (Medicine medicine : inventory.values()) {
+            System.out.println("--[ Drug: " + medicine.getName() + 
+                               " Manufacturer: " + medicine.getCompany() + 
+                               " Price: " + medicine.getPrice() + 
+                               " Quantity: " + medicine.getQuantity() + " ]--");
+        }
     }
 
     public void viewMedicine(String name) {
