@@ -4,11 +4,11 @@ public class Main {
     public static void main(String[] args) {
         
         Pharmacy pharmacy = new Pharmacy();
-        Admin admin = new Admin(pharmacy);
+        Admin admin = new Admin("admin", "admin", 1, pharmacy);
         Scanner sc = new Scanner(System.in);
 
-        admin.addMedicine("Paracetamol", "GSK", 5.00, 100);
-        admin.addPharmacist(new Pharmacist("Jojo", pharmacy));
+        admin.addMedicine("Paracetamol", "GSK", 5.00, 100, false);
+        admin.addPharmacist(new Pharmacist("Jojo", "test", 9029, pharmacy));
         
         while (true) {
         System.out.println("\n--[ Pharmacy Management System ]--\n" +
@@ -52,8 +52,14 @@ public class Main {
                             double price = sc.nextDouble();
                             System.out.print("Quantity: ");
                             int quantity = sc.nextInt();
+
+                            //refactor
+                            System.out.print("Rx (true/false): ");
+                            String RxString = sc.nextLine().toLowerCase();
+                            boolean Rx = RxString.toLowerCase().equals("true");
+
                             sc.nextLine();
-                            admin.addMedicine(name, company, price, quantity);
+                            admin.addMedicine(name, company, price, quantity, Rx);
                             sc.nextLine();
                             admin.viewInventory();
                             break;
@@ -78,7 +84,9 @@ public class Main {
                         case 5:
                             System.out.print("Add Pharmacist: ");
                             String pharmacistName = sc.nextLine();
-                            admin.addPharmacist(new Pharmacist(pharmacistName, pharmacy));
+                            String pharmacistPass = sc.nextLine();
+                            int pharmacistIDnumber = sc.nextInt();
+                            admin.addPharmacist(new Pharmacist(pharmacistName, pharmacistPass, pharmacistIDnumber, pharmacy));
                             break;
                         case 6:
                             System.out.print("Remove Pharmacist: ");
@@ -114,7 +122,10 @@ public class Main {
             case 2:
             System.out.print("Enter your name: ");
             String pharmacistName = sc.nextLine();
-            Pharmacist pharmacist = new Pharmacist(pharmacistName, pharmacy);
+            String pharmacistPass = sc.nextLine();
+            int pharmacistIDnumber = sc.nextInt();
+
+            Pharmacist pharmacist = new Pharmacist(pharmacistName, pharmacistPass, pharmacistIDnumber, pharmacy);
             boolean pharmacistRunning = true;
             while (pharmacistRunning) {
                 System.out.println(
@@ -144,7 +155,10 @@ public class Main {
                         System.out.print("Quantity: ");
                         int sellQuantity = sc.nextInt();
                         sc.nextLine();
-                        pharmacist.sellMedicine(sellDrug, sellQuantity);
+                        
+                        System.out.print("Rx Valid? \t 1 - Yes \t 2 - No");
+                        int RxReqChoice = sc.nextInt();
+                        pharmacist.sellMedicine(sellDrug, sellQuantity, RxReqChoice);
                         break;
                     case 3:
                         pharmacistRunning = false;

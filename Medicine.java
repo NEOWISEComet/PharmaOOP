@@ -1,19 +1,21 @@
 class Medicine {
     
-    private String name;
+    private String medicineName;
     private String company;
     private double price;
     private int quantity;
+    private boolean Rx;
 
-    public Medicine(String name, String company, double price, int quantity) {
-        this.name = name;
+    public Medicine(String medicineName, String company, double price, int quantity, boolean Rx) {
+        this.medicineName = medicineName;
         this.company = company;
         this.price = price;
         this.quantity = quantity;
+        this.Rx = Rx;
     }
 
-    public String getName() {
-        return name;
+    public String getmedicineName() {
+        return medicineName;
     }
 
     public String getCompany() {
@@ -36,9 +38,14 @@ class Medicine {
         this.quantity = quantity;
     }
 
+    public boolean getRx() {
+        return Rx;
+    }
+
     @Override
     public String toString() {
-        return "--[ Drug: " + name + "\tManufacturer: " + company + "\tPrice: " + price + "\tQuantity: " + quantity + " ]--";
+        return "--[ Drug: " + medicineName + "\tManufacturer: " + company + "\tPrice: " + price + "\tQuantity: " + quantity + "\tRx: " + Rx + "]--";
     }
 
 }
+

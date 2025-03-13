@@ -1,23 +1,24 @@
-class Admin {
+class Admin extends Person{
 
     private Pharmacy pharmacy;
-    private String name = "admin";
-    private String password = "admin";
+    /*private String name = "admin";
+    private String password = "admin";*/
 
-    public Admin(Pharmacy pharmacy) {
+    public Admin(String name, String password, int IDnumebr, Pharmacy pharmacy) {
+        super(name, IDnumebr, password);
         this.pharmacy = pharmacy;
     }
 
-    public void addMedicine(String name, String company, double price, int quantity) {
-        pharmacy.addMedicine(new Medicine(name, company, price, quantity));
+    public void addMedicine(String medicineName, String company, double price, int quantity, boolean Rx) {
+        pharmacy.addMedicine(new Medicine(medicineName, company, price, quantity, Rx));
     }
 
-    public void editMedicine(String name, double price, int quantity) {
-        pharmacy.editMedicine(name, price, quantity);
+    public void editMedicine(String medicineName, double price, int quantity) {
+        pharmacy.editMedicine(medicineName, price, quantity);
     }
 
-    public void removeMedicine(String name) {
-        pharmacy.removeMedicine(name);
+    public void removeMedicine(String medicineName) {
+        pharmacy.removeMedicine(medicineName);
     }
 
     public void viewInventory() {
@@ -36,9 +37,5 @@ class Admin {
         for (Pharmacist pharmacist : pharmacy.getPharmacists()) {
             System.out.println(pharmacist);
         }
-    }
-
-    public boolean login(String name, String password) {
-        return this.name.equals(name) && this.password.equals(password);
     }
 }
