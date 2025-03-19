@@ -37,7 +37,7 @@ class Person{
         return this.name.equals(name) && this.password.equals(password);
     }
 
-    //checks Credentials '?' is for the class or lists later, the persons are the class
+    //checks Credentials '?' is for the class or lists later, the persons are the classes
     public static Person checkCredentials(List<? extends Person> persons, String name, String password) {
         for (Person person : persons) {
             if (person.login(name, password)) {
@@ -46,4 +46,5 @@ class Person{
         }
         return null;
     }
+    
 }

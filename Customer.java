@@ -11,7 +11,15 @@ class Customer extends Person{
     public void buyMedicine(String medicineName, int quantity){
         pharmacy.buyMedicine(medicineName, quantity);
     }
+
+    public void searchMedicine(String medicineName) {
+        pharmacy.searchMedicine(medicineName);
+    }
     
+    public void viewInventory() {
+        pharmacy.viewInventory();
+    }
+
     public int getContactNumber(){
         return contactNumber;
     }

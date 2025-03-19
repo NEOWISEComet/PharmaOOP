@@ -36,7 +36,7 @@ class Inventory {
         }
     }
 
-    public void viewMedicine(String medicineName) {
+    public void searchMedicine(String medicineName) {
         Medicine medicine = inventory.get(medicineName);
         if (medicine != null) {
             System.out.println(medicine);
@@ -111,6 +111,8 @@ class Inventory {
     public void noRxReq(String medicineName, int quantity){
         if (!Prescription(medicineName)) {
             buyMedicine(medicineName, quantity);
+        }else{
+            return;
         }
     }
 
@@ -118,6 +120,8 @@ class Inventory {
     private void RxReq(String medicineName, int quantity, String pharmacist){
         if (Prescription(medicineName)) {
             sellDrug(medicineName, quantity, pharmacist);
+        }else {
+            return;
         }
     }
 

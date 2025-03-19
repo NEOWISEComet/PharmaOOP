@@ -1,16 +1,14 @@
 class Pharmacist extends Person{
 
-    private String holdName;
     private Pharmacy pharmacy;
 
     public Pharmacist(String name, String password, int IDnumber, Pharmacy pharmacy) {
         super(name, IDnumber, password);
         this.pharmacy = pharmacy;
-        this.holdName = name;
     }
 
-    public void searchMedicine(String name) {
-        pharmacy.viewMedicine(name);
+    public void searchMedicine(String medicineName) {
+        pharmacy.searchMedicine(medicineName);
     }
 
     public void sellMedicine(String name, int quantity, int choice) {
@@ -23,6 +21,6 @@ class Pharmacist extends Person{
 
     @Override
     public String toString() {
-        return "Pharmacist: " + holdName;
+        return "Pharmacist: " + this.getName();
     }
 }

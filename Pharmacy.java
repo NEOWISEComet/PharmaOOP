@@ -1,8 +1,12 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 class Pharmacy {
     private Inventory inventory = new Inventory();
+    private Admin admin;
+    private HashMap<String, Request> requests;
+    
     private List<Pharmacist> pharmacists = new ArrayList<>();
     private List<Customer> customers = new ArrayList<>();
     private List<Company> companies = new ArrayList<>();
@@ -23,8 +27,8 @@ class Pharmacy {
         inventory.viewInventory();
     }
 
-    public void viewMedicine(String name) {
-        inventory.viewMedicine(name);
+    public void searchMedicine(String medicineName) {
+        inventory.searchMedicine(medicineName);
     }
 
     public void sellMedicine(String name, int quantity, int choice) {
@@ -70,6 +74,53 @@ class Pharmacy {
         return pharmacists;
     }
 
+    public List<Company> getCompany(){
+        return companies;
+    }
+
+    public void proccessRequest(String medicineName) {
+        Request request = requests.get(medicineName);
+        if (request != null) {
+            switch (request.getAction()) {
+                case "add":
+                    addMedicine(new Medicine(request.getMedicineName(), request.getCompany(), request.getPrice(), request.getQuantity(), request.isRx()));
+                    break;
+                case "edit":
+                    editMedicine(request.getMedicineName(), request.getPrice(), request.getQuantity());
+                    break;
+                case "remove":
+                    removeMedicine(request.getMedicineName());
+                    break;
+            }
+            requests.remove(medicineName);
+        }else {
+            System.out.println("No request found");
+        }
+    }
+
+    public void receiveRequest(Request request) {
+        requests.put(request.getMedicineName(), request);
+    }
+
+    public void requestAddMedicine(String medicineName, String company, double price, int quantity, boolean Rx) {
+       Request request = new Request(medicineName, company, price, quantity, Rx, "add");
+        receiveRequest(request);
+    }
+
+    public void requestEditMedicine(String medicineName, String company, double price, int quantity) {
+        Request request = new Request(medicineName, company, price, quantity, "edit");
+        receiveRequest(request);
+    }
+
+    public void requestRemoveMedicine(String medicineName, String company) {
+        Request request = new Request(medicineName, company, 0, 0, "remove");
+        receiveRequest(request);
+    }
+
+    public HashMap<String, Request> getRequests() {
+        return requests;
+    }
+
     //Check credentials for pharmacists
     public Pharmacist pharmacistCred(String name, String password) {
         return (Pharmacist) Person.checkCredentials(pharmacists, name, password);
@@ -86,8 +137,8 @@ class Pharmacy {
     }
 
     //Check credentials for admin
-    public Admin adminCreds(String name, String password) {
-        return (Admin) Person.checkCredentials(pharmacists, name, password);
-    }
+    /*public Admin adminCreds(String name, String password) {
+        return (Admin) Person.checkCredentials(admin, name, password);
+    }*/
 
 }
