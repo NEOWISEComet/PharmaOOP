@@ -32,6 +32,10 @@ class Person{
         return IDnumber;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     //Checks if the name and password matches
     public boolean login(String name, String password) {
         return this.name.equals(name) && this.password.equals(password);

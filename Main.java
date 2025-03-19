@@ -5,12 +5,11 @@ public class Main {
     
     Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
-        
-        Admin admin = new Admin("admin", "admin", 1, pharmacy);
-        Scanner sc = new Scanner(System.in);
 
         pharmacy.addMedicine(new Medicine("Paracetamol", "GSK", 5.00, 100, false));
         pharmacy.addPharmacist(new Pharmacist("Jojo", "test", 9029, pharmacy));
+        pharmacy.addCompany(new Company("GSK", 1234, "test", 1234567890));
+        pharmacy.addCustomer(new Customer("Name", "passw", 1, 9609));
 
     }
     
@@ -298,6 +297,98 @@ public class Main {
             default:
                 System.out.println("Invalid");
                 break;
+        }
+    }
+
+    //Spray and Pray
+    public void CustomerMenu(){
+
+        System.out.println(
+            "--[ LogIn || SignUp ]--\n" +
+            "1. Log In\n" +
+            "2. Sign Up\n" +
+            "0. Exit\n"
+        );
+
+        int LoginSignup = sc.nextInt();
+        sc.nextLine();
+        boolean Running = true;
+        while(Running){
+            switch (LoginSignup) {
+                case 1:
+                    System.out.print("Name: ");
+                    String name = sc.nextLine();
+                    System.out.print("Password: ");
+                    String password = sc.nextLine();
+                    Customer customer = pharmacy.customerCred(name, password);
+                    if (customer != null) {
+                        CustomerPage();
+                    } else {
+                        System.out.println("Invalid credentials");
+                    }
+                    break;
+                case 2:
+                    System.out.print("Name: ");
+                    String newName = sc.nextLine();
+                    System.out.print("Password: ");
+                    String newPassword = sc.nextLine();
+                    System.out.print("ID: ");
+                    int newID = sc.nextInt();
+                    sc.nextLine();
+                    System.out.print("Contact: ");
+                    int newContact = sc.nextInt();
+                    sc.nextLine();
+                    pharmacy.addCustomer(new Customer(newName, newPassword, newID, newContact));
+                    break;
+                case 0:
+                    Running = false;
+                    break;
+                default:
+                    System.out.println("Invalid");
+                    break;
+            }
+        }      
+    }
+
+    //After Customer Log In
+    public void CustomerPage(){
+        boolean Running = true;
+        while (Running){
+            System.out.println(
+                "--[ Customer Page ]--\n" +
+                "1. View Incentory\n" +
+                "2. Search medicine\n" +
+                "3. Buy medicine\n" +
+                "0. Exit"
+            );
+
+            int choice = sc.nextInt();
+            sc.nextLine();
+            switch (choice) {
+                case 1:
+                    pharmacy.viewInventory();
+                    break;
+                case 2:
+                    System.out.print("Search Drug: ");
+                    String searchDrug = sc.nextLine();
+                    pharmacy.searchMedicine(searchDrug);
+                    break;
+                case 3:
+                    System.out.print("Buy Drug: ");
+                    String buyDrug = sc.nextLine();
+                    System.out.print("Quantity: ");
+                    int buyQuantity = sc.nextInt();
+                    sc.nextLine();
+
+                    pharmacy.buyMedicine(buyDrug, buyQuantity);
+                    break;
+                case 0:
+                    Running = false;
+                    break;                   
+                default:
+                    System.out.println("Invalid");
+                    break;
+            }
         }
     }
 

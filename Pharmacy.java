@@ -138,7 +138,11 @@ class Pharmacy {
 
     //Check credentials for admin
     /*public Admin adminCreds(String name, String password) {
-        return (Admin) Person.checkCredentials(admin, name, password);
+        return (Admin) Person.checkCredentials(List.of(admin), name, password);
     }*/
+
+    public boolean login(String name, String password) {
+        return admin.getName().equals(name) && admin.getPassword().equals(password);
+    }
 
 }
