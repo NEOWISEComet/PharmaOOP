@@ -3,7 +3,7 @@ import java.util.List;
 class Person{
     
     protected String name;
-    private String password;
+    protected String password;
     private int IDnumber;
 
     public Person(String name, int IDnumber, String password) {

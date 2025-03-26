@@ -53,7 +53,6 @@ class Inventory {
                 System.out.println("Prescription Required: " + medicineName + 
                 "\n1 Rx Valid" +
                 "\n2 Rx Invalid");
-                //int choice = sc.nextInt();
                 switch (choice) {
                     case 1:
                         RxReq(medicineName, quantity, pharmacist);

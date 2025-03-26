@@ -11,6 +11,11 @@ class Pharmacy {
     private List<Customer> customers = new ArrayList<>();
     private List<Company> companies = new ArrayList<>();
 
+    public Pharmacy() {
+        this.admin = new Admin("admin", "admin123", 1, this);
+    }
+
+    //add-remove-edit medicines is obsolete becsause of the request methods and class
     public void addMedicine(Medicine medicine) {
         inventory.addMedicine(medicine);
     }
@@ -23,6 +28,7 @@ class Pharmacy {
         inventory.removeMedicine(name);
     }
 
+    //returns meds in the inventory
     public void viewInventory() {
         inventory.viewInventory();
     }
@@ -31,6 +37,7 @@ class Pharmacy {
         inventory.searchMedicine(medicineName);
     }
 
+    //sellMed is for Pharmacist class while buyMed is for Customer class
     public void sellMedicine(String name, int quantity, int choice) {
         inventory.sellMedicine(name, quantity, pharmacists.get(0).toString(), choice);
     }
@@ -66,11 +73,9 @@ class Pharmacy {
         companies.remove(company);
     }
 
-    public Medicine getmedicineName(String medicineName) {
-        return inventory.getmedicineName(medicineName);
-    }
-
+    //getters for (Pharmacists, Customers, Companies)
     public List<Pharmacist> getPharmacists() {
+        System.out.println("Pharmacists:");
         return pharmacists;
     }
 
@@ -78,6 +83,11 @@ class Pharmacy {
         return companies;
     }
 
+    public List<Customer> getCustomers() {
+        return customers;
+    }
+
+    //Request methods, Company class requests, Admin class processes the requests
     public void proccessRequest(String medicineName) {
         Request request = requests.get(medicineName);
         if (request != null) {
@@ -117,6 +127,7 @@ class Pharmacy {
         receiveRequest(request);
     }
 
+    //returns the requests
     public HashMap<String, Request> getRequests() {
         return requests;
     }
@@ -145,4 +156,21 @@ class Pharmacy {
         return admin.getName().equals(name) && admin.getPassword().equals(password);
     }
 
+    public void ListPharmacists() {
+        for (Pharmacist pharmacist : pharmacists) {
+            System.out.println(pharmacist.toString());
+        }
+    }
+
+    public void ListCustomers() {
+        for (Customer customer : customers) {
+            System.out.println(customer.toString());
+        }
+    }
+
+    public void ListCompanies() {
+        for (Company company : companies) {
+            System.out.println(company.toString());
+        }
+    }
 }

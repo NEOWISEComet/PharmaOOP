@@ -3,19 +3,87 @@ import java.util.Scanner;
 public class Main {
     static Pharmacy pharmacy = new Pharmacy();
     
-    Scanner sc = new Scanner(System.in);
+    static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
 
+        //test datas
         pharmacy.addMedicine(new Medicine("Paracetamol", "GSK", 5.00, 100, false));
         pharmacy.addPharmacist(new Pharmacist("Jojo", "test", 9029, pharmacy));
         pharmacy.addCompany(new Company("GSK", 1234, "test", 1234567890));
-        pharmacy.addCustomer(new Customer("Name", "passw", 1, 9609));
+        pharmacy.addCustomer(new Customer("Name", "passw", 1, 9609));        
 
+        boolean Running = true;
+        while (Running) {
+            System.out.println(
+            "--[ Pharmacy Management System ]--\n" +
+            "1. Admin\n" +
+            "2. Pharmacist\n" +
+            "3. Company\n" +
+            "4. Customer\n" +
+            "0. Exit"
+            );
+
+            System.out.print("Select: ");
+            int choice = sc.nextInt();
+            sc.nextLine();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Name: ");
+                    String adminName = sc.nextLine();
+                    System.out.print("Password: ");
+                    String adminPass = sc.nextLine();            
+                    if (pharmacy.login(adminName, adminPass)) {
+                        AdminMenu();
+                    } else {
+                        System.out.println("Invalid credentials");
+                        sc.nextLine();
+                    }
+                    break;
+    
+                case 2:
+                    System.out.print("Name: ");
+                    String pharmacistName = sc.nextLine();
+                    System.out.print("Password: ");
+                    String pharmacistPass = sc.nextLine();
+                    Pharmacist pharmacist = pharmacy.pharmacistCred(pharmacistName, pharmacistPass);
+                    if (pharmacist != null) {
+                        PharmacistMenu(pharmacistName);
+                    } else {
+                        System.out.println("Invalid credentials");
+                    }
+                    break;
+    
+                case 3:
+                    System.out.print("Name: ");
+                    String companyName = sc.nextLine();
+                    System.out.print("Password: ");
+                    String companyPass = sc.nextLine();
+                    Company company = pharmacy.companyCreds(companyName, companyPass);
+                    if (company != null) {
+                        ComapnyMenu(companyName);
+                    } else {
+                        System.out.println("Invalid credentials");
+                    }
+                    break;
+    
+                case 4:
+                    CustomerMenu();
+                    break;
+
+                case 0:
+                    Running = false;
+                    break;
+            
+                default:
+                    System.out.println("Invalid");
+                    break;
+            }                
+        }            
     }
     
-    //Not Tested
-    public void AdminMenu(){
-
+    //Not Tested, admin not availabvale
+    public static void AdminMenu(){
         boolean Running = true;
         while (Running) {
             System.out.println(
@@ -25,6 +93,8 @@ public class Main {
             "3. Pharmacists\n" +
             "0. Exit"
             );
+
+            System.out.print("Select: ");
             int choice = sc.nextInt();
             sc.nextLine();
             switch (choice){
@@ -36,21 +106,24 @@ public class Main {
                         "\n--[ Pharmacy Management System ]--\n" +
                         "1. Add Company\n" +
                         "2. Remove Company\n" +
-                        "3. Edit Company\n" + /* Not Implemented */ 
+                        "3. Edit Company\n" + /* Not Implemented */
+                        "4. View Companies\n" +
                         "0. Exit"
                         );
-                        System.out.println();
+
+                        System.out.print("Select: ");
                         int companyCase = sc.nextInt();
                         sc.nextLine();
+
                         switch (companyCase) {
                             case 1:
-                                System.out.println("Company: ");
+                                System.out.print("Company: ");
                                 String CompanyName = sc.nextLine();
-                                System.out.println("ID: ");
+                                System.out.print("ID: ");
                                 int ComapnyID = sc.nextInt();
-                                System.out.println("Password: ");
+                                System.out.print("Password: ");
                                 String CompanyPass = sc.nextLine();
-                                System.out.println("Contact: ");
+                                System.out.print("Contact: ");
                                 int CompanyContact = sc.nextInt();
         
                                 pharmacy.addCompany(new Company(CompanyName, ComapnyID, CompanyPass, CompanyContact));
@@ -71,6 +144,30 @@ public class Main {
                                 } else {
                                     System.out.println("Not found");
                                 }
+                                break;
+                            
+                            case 3:
+                                System.out.print("Edit Company: ");
+                                String editCompany = sc.nextLine();
+                                Company companyEdit = null;
+                                for (Company company : pharmacy.getCompany()) {
+                                    if (company.toString().equals("Company: " + editCompany)) {
+                                        companyEdit = company;
+                                        break;
+                                    }
+                                }
+                                if (companyEdit != null) {
+                                    System.out.print("Edit Contact: ");
+                                    int editContact = sc.nextInt();
+                                    companyEdit.setCompanyContact(editContact);
+                                } else {
+                                    System.out.println("Not found");
+                                }
+                                break;
+                            
+
+                            case 4:
+                                pharmacy.ListCompanies();
                                 break;
         
                             case 0:
@@ -100,6 +197,7 @@ public class Main {
                         "0. Exit"
                         );
 
+                        System.out.print("Select: ");
                         int medicineCase = sc.nextInt();
                         sc.nextLine();
                         switch (medicineCase) {
@@ -143,6 +241,8 @@ public class Main {
                         "3. View Pharmacists\n" +
                         "0. Exit"
                         );
+
+                        System.out.print("Select: ");
                         int pharmacistCase = sc.nextInt();
                         sc.nextLine();
                         switch (pharmacistCase) {
@@ -196,7 +296,7 @@ public class Main {
     }
 
     //Not FInal
-    public void PharmacistMenu(String pharmacistName){
+    public static void PharmacistMenu(String pharmacistName){
         boolean Running = true;
         while (Running){
             System.out.println(
@@ -208,6 +308,7 @@ public class Main {
                 "0. Exit"
             );
 
+            System.out.print("Select: ");
             int choice = sc.nextInt();
             sc.nextLine();
             switch (choice) {
@@ -241,7 +342,7 @@ public class Main {
     }
 
     //Not Tested Pray that it works
-    public void ComapnyMenu(String companyName){
+    public static void ComapnyMenu(String companyName){
         
         boolean Running = true;
         while (Running)
@@ -254,15 +355,20 @@ public class Main {
             "0. Exit"
         );
 
+        System.out.print("Select: ");
         int choice = sc.nextInt();
         sc.nextLine();
         switch (choice) {
             case 1:               
-                Object[] AddmedData = medInfo();
-                String AddMedname = (String) AddmedData[0];
-                double AddMedprice = (double) AddmedData[1];
-                int AddMedquantity = (int) AddmedData[2];
-                //refactor
+                System.out.print("Add Medicine");
+                String AddMedname = sc.nextLine();
+
+                System.out.print("Price: ");
+                int AddMedprice = sc.nextInt();
+
+                System.out.print("Quantity: ");
+                int AddMedquantity = sc.nextInt();
+                
                 System.out.print("Rx (true/false): ");
                 String RxString = sc.nextLine().toLowerCase();
                 boolean Rx = RxString.toLowerCase().equals("true");
@@ -272,10 +378,14 @@ public class Main {
                 break;
 
             case 2:
-                Object[] EditmedData = medInfo();
-                String EditMedname = (String) EditmedData[0];
-                double EditMedprice = (double) EditmedData[1];
-                int EditMedquantity = (int) EditmedData[2];
+                System.out.print("Add Medicine");
+                String EditMedname = sc.nextLine();
+
+                System.out.print("Price: ");
+                int EditMedprice = sc.nextInt();
+
+                System.out.print("Quantity: ");
+                int EditMedquantity = sc.nextInt();
 
                 pharmacy.requestEditMedicine(EditMedname, companyName, EditMedprice, EditMedquantity);
                 break;
@@ -300,8 +410,8 @@ public class Main {
         }
     }
 
-    //Spray and Pray
-    public void CustomerMenu(){
+    //Spray and Pray || LogInSign
+    public static void CustomerMenu(){
 
         System.out.println(
             "--[ LogIn || SignUp ]--\n" +
@@ -310,6 +420,7 @@ public class Main {
             "0. Exit\n"
         );
 
+        System.out.print("Select: ");
         int LoginSignup = sc.nextInt();
         sc.nextLine();
         boolean Running = true;
@@ -322,7 +433,7 @@ public class Main {
                     String password = sc.nextLine();
                     Customer customer = pharmacy.customerCred(name, password);
                     if (customer != null) {
-                        CustomerPage();
+                        CustomerPage(name, password);
                     } else {
                         System.out.println("Invalid credentials");
                     }
@@ -351,7 +462,7 @@ public class Main {
     }
 
     //After Customer Log In
-    public void CustomerPage(){
+    public static void CustomerPage(String customerName, String customerPassword){
         boolean Running = true;
         while (Running){
             System.out.println(
@@ -362,6 +473,7 @@ public class Main {
                 "0. Exit"
             );
 
+            System.out.print("Select: ");
             int choice = sc.nextInt();
             sc.nextLine();
             switch (choice) {
@@ -382,6 +494,10 @@ public class Main {
 
                     pharmacy.buyMedicine(buyDrug, buyQuantity);
                     break;
+                case 4:
+                    pharmacy.removeCustomer(pharmacy.customerCred(customerName, customerPassword));
+                    Running = false;
+                    break;
                 case 0:
                     Running = false;
                     break;                   
@@ -390,19 +506,5 @@ public class Main {
                     break;
             }
         }
-    }
-
-    public Object[] medInfo(){
-        System.out.print("Drug Name: ");
-        String name = sc.nextLine();
-        
-        System.out.print("Price: ");
-        double price = sc.nextDouble();
-
-        System.out.print("Quantity: ");
-        int quantity = sc.nextInt();
-        sc.nextLine();
-
-        return new Object[]{name, price, quantity};
     }
 }

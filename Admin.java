@@ -1,13 +1,10 @@
 class Admin extends Person{
 
-    private Pharmacy pharmacy;
-    
-    /*private String name = "admin";
-    private String password = "admin";*/
+    //private Pharmacy pharmacy;
 
     public Admin(String name, String password, int IDnumebr, Pharmacy pharmacy) {
         super(name, IDnumebr, password);
-        this.pharmacy = pharmacy;       
+        //this.pharmacy = pharmacy;
     }
 
     /*public void addMedicine(String medicineName, String company, double price, int quantity, boolean Rx) {
@@ -40,9 +37,10 @@ class Admin extends Person{
         }
     }*/
 
+    /*
     public void receiveRequest(Request request) {
         pharmacy.getRequests().put(request.getMedicineName(), request);
-    }
+    } */
 
     /*public void proccessRequest(String medicineName) {
         HashMap<String, Request> requests = pharmacy.getRequests();

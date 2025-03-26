@@ -7,7 +7,8 @@ class Customer extends Person{
         super(name, IDnumber, password);
         this.contactNumber = contactNumber;
     }
- 
+
+    /*
     public void buyMedicine(String medicineName, int quantity){
         pharmacy.buyMedicine(medicineName, quantity);
     }
@@ -18,7 +19,7 @@ class Customer extends Person{
     
     public void viewInventory() {
         pharmacy.viewInventory();
-    }
+    } */
 
     public int getContactNumber(){
         return contactNumber;

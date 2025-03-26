@@ -56,7 +56,8 @@ public class Request {
     public void setAction(String action) {
         this.action = action;
     }
-    public void updateRequest(String medicineName, String company, String field, Object newValue) {
+
+    /*public void updateRequest(String medicineName, String company, String field, Object newValue) {
         if (this.medicineName.equals(medicineName) && this.company.equals(company)) {
             switch (field) {
                 case "price":
@@ -83,9 +84,14 @@ public class Request {
                     throw new IllegalArgumentException("Invalid field: " + field);
             }
         }
-    }
+    }*/
     
     public Request(String medicineName, String company, double price, int quantity, String action) {
-        this(medicineName, company, price, quantity, false, action);
+        //this(medicineName, company, price, quantity, false, action);
+        this.medicineName = medicineName;
+        this.company = company;
+        this.price = price;
+        this.quantity = quantity;
+        this.action = action;
     }
 }

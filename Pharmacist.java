@@ -7,18 +7,6 @@ class Pharmacist extends Person{
         this.pharmacy = pharmacy;
     }
 
-    public void searchMedicine(String medicineName) {
-        pharmacy.searchMedicine(medicineName);
-    }
-
-    public void sellMedicine(String name, int quantity, int choice) {
-        pharmacy.sellMedicine(name, quantity, choice);
-    }
-
-    public void viewInventory() {
-        pharmacy.viewInventory();
-    }
-
     @Override
     public String toString() {
         return "Pharmacist: " + this.getName();
