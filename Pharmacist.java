@@ -1,10 +1,7 @@
 class Pharmacist extends Person{
 
-    private Pharmacy pharmacy;
-
-    public Pharmacist(String name, String password, int IDnumber, Pharmacy pharmacy) {
+    public Pharmacist(String name, String password, int IDnumber) {
         super(name, IDnumber, password);
-        this.pharmacy = pharmacy;
     }
 
     @Override

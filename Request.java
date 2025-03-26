@@ -56,35 +56,6 @@ public class Request {
     public void setAction(String action) {
         this.action = action;
     }
-
-    /*public void updateRequest(String medicineName, String company, String field, Object newValue) {
-        if (this.medicineName.equals(medicineName) && this.company.equals(company)) {
-            switch (field) {
-                case "price":
-                    if (newValue instanceof Double) {
-                        setPrice((Double) newValue);
-                    }
-                    break;
-                case "quantity":
-                    if (newValue instanceof Integer) {
-                        setQuantity((Integer) newValue);
-                    }
-                    break;
-                case "Rx":
-                    if (newValue instanceof Boolean) {
-                        setRx((Boolean) newValue);
-                    }
-                    break;
-                case "action":
-                    if (newValue instanceof String) {
-                        setAction((String) newValue);
-                    }
-                    break;
-                default:
-                    throw new IllegalArgumentException("Invalid field: " + field);
-            }
-        }
-    }*/
     
     public Request(String medicineName, String company, double price, int quantity, String action) {
         //this(medicineName, company, price, quantity, false, action);

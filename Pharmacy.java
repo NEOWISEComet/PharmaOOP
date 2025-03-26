@@ -12,7 +12,7 @@ class Pharmacy {
     private List<Company> companies = new ArrayList<>();
 
     public Pharmacy() {
-        this.admin = new Admin("admin", "admin123", 1, this);
+        this.admin = new Admin("admin", "admin123", 1);
     }
 
     //add-remove-edit medicines is obsolete becsause of the request methods and class
@@ -146,11 +146,6 @@ class Pharmacy {
     public Company companyCreds(String name, String password) {
         return (Company) Person.checkCredentials(companies, name, password);
     }
-
-    //Check credentials for admin
-    /*public Admin adminCreds(String name, String password) {
-        return (Admin) Person.checkCredentials(List.of(admin), name, password);
-    }*/
 
     public boolean login(String name, String password) {
         return admin.getName().equals(name) && admin.getPassword().equals(password);

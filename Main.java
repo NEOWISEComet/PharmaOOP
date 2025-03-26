@@ -8,7 +8,7 @@ public class Main {
 
         //test datas
         pharmacy.addMedicine(new Medicine("Paracetamol", "GSK", 5.00, 100, false));
-        pharmacy.addPharmacist(new Pharmacist("Jojo", "test", 9029, pharmacy));
+        pharmacy.addPharmacist(new Pharmacist("Jojo", "test", 9029));
         pharmacy.addCompany(new Company("GSK", 1234, "test", 1234567890));
         pharmacy.addCustomer(new Customer("Name", "passw", 1, 9609));        
 
@@ -251,7 +251,7 @@ public class Main {
                                 String pharmacistName = sc.nextLine();
                                 String pharmacistPass = sc.nextLine();
                                 int pharmacistIDnumber = sc.nextInt();
-                                pharmacy.addPharmacist(new Pharmacist(pharmacistName, pharmacistPass, pharmacistIDnumber, pharmacy));
+                                pharmacy.addPharmacist(new Pharmacist(pharmacistName, pharmacistPass, pharmacistIDnumber));
                                 break;
                             case 2:
                                 System.out.print("Remove Pharmacist: ");
@@ -300,7 +300,7 @@ public class Main {
         boolean Running = true;
         while (Running){
             System.out.println(
-                "--[ Pharmacy Management System ]--\n" +
+                "\n--[ Pharmacy Management System ]--\n" +
                 "Pharmacist: " + pharmacistName + "\n" +
                 "1. View Incentory\n" +
                 "2. Search medicine\n" +
@@ -321,13 +321,14 @@ public class Main {
                     pharmacy.searchMedicine(searchDrug);
                     break;
                 case 3:
+                    pharmacy.viewInventory();
                     System.out.print("Sell Drug: ");
                     String sellDrug = sc.nextLine();
                     System.out.print("Quantity: ");
                     int sellQuantity = sc.nextInt();
                     sc.nextLine();
                     
-                    System.out.print("Rx Valid? \t 1 - Yes \t 2 - No");
+                    System.out.print("\t 1 - Yes \t 2 - No \nRx Valid? ");
                     int RxReqChoice = sc.nextInt();
                     pharmacy.sellMedicine(sellDrug, sellQuantity, RxReqChoice);
                     break;
@@ -414,7 +415,7 @@ public class Main {
     public static void CustomerMenu(){
 
         System.out.println(
-            "--[ LogIn || SignUp ]--\n" +
+            "\n--[ LogIn || SignUp ]--\n" +
             "1. Log In\n" +
             "2. Sign Up\n" +
             "0. Exit\n"

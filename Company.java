@@ -1,6 +1,5 @@
 class Company extends Person{
 
-    //private Pharmacy pharmacy;
     private int companyContact;
     
     public Company(String name, int IDnumber, String password, int companyContact) {
